@@ -1,0 +1,124 @@
+{% extends 'doctor_header.html' %}
+
+{% load static %}
+
+{% block contant %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+  <head>
+<body>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 50%;
+  padding: 20px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 20%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 50%;
+  }
+}
+</style>
+<body>
+<br>
+<br>
+<br>
+
+
+  <div class="container">
+        <br>
+    <br><br>
+    <br>
+    
+    <br>
+    <br>
+    <h1>Profile</h1><br>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+    {% if msg %}
+    <b style="color: red;">{{msg}}</b>
+    {% endif %}
+    <br>
+    <label for="email"><b>Degree</b></label><br>
+    <input type="text" placeholder="Enter Degree" name="doctor_degree" value={{doctor_profile.doctor_degree}} readonly ><br>
+    <label for="email"><b>speciality</b></label><br>
+    <input type="text" placeholder="Enter speciality" name="doctor_speciality" value={{doctor_profile.doctor_speciality}} readonly><br>
+    <label for="email"><b>open Time</b></label><br>
+    <input type="text" placeholder="Enter opening time"  name="doctor_start_time" value={{doctor_profile.doctor_start_time}} readonly><br>
+
+    <label for="email"><b>close Time</b></label><br>
+    <input type="text" placeholder="Enter close time" name="doctor_end_time" value={{doctor_profile.doctor_end_time}} readonly><br>
+    <label for="email"><b>fees</b></label><br>
+    <input type="text" placeholder="Enter fees" name="doctor_fees" value={{doctor_profile.doctor_fees}} readonly><br>
+    
+    <div class="clearfix">
+     <a href="{% url 'doctor_index' %}"> <button  class="cancelbtn">Cancel</button></a>
+     <a href="{% url 'doctor_profile_update' %}"> <button class="signupbtn"  >Update</button></a>
+    </div>
+  </div>
+    
+  </body>
+</html>
+
+{% endblock %}

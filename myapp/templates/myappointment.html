@@ -1,0 +1,96 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block contant %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+</head>
+
+<body id="top">
+
+<section class="page-title bg-1">
+      <div class="col-md-12">
+        <div class="block text-center">
+            <br><br><br><br><br>
+          <h1 class="text-capitalize mb-5 text-lg">Appoinment</h1>
+        </div>
+    </div>
+</section>
+<br>
+{% if msg %}
+    <b style="color:red">{{msg}}</b>
+{% endif %}
+<br>
+ <table border="6" width="70%" cellpadding="10px" cellspacing="10px">
+                <tr>
+                  <th>Sr. No</th>
+                  <th>Doctor Name</th>
+                  <th>Patient Name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Health Issue</th>
+                  <th>Status</th>
+                  <th>action</th>
+                  <th>fees</th>
+                  <th>pay</th>
+                </tr>
+                {% for i in appointments %}
+                <tr>
+                  <td>{{i.id}}</td>
+                  <td>{{i.doctor.doctor.fname}}</td>
+                  <td>{{i.patient.fname}}</td>
+                  <td>{{i.date}}</td>
+                  <td>{{i.time}}</td>
+                  <td>{{i.discrpiton}}</td>
+                  <td>{{i.status}}</td>
+                  <td>
+                    <form action="{% url 'patient_cancel_appointment' pk=i.pk %} " method="get">
+                      {% csrf_token %}
+                      {% if i.status == 'pending' %}
+                        <input type="submit" name="button" style="color:red;" value="cancel">
+                      {% elif  i.status == 'completed'%}
+                      <a href="{% url 'prescription_by_doctor_patient' pk=i.pk %}">  <input type="button" name="button" style="color: blue;" value="prescription"></a>
+                     
+                
+                      {% else %}
+                        <input type="submit" name="button" value="{{i.status}}" disabled>
+                        
+                      {% endif %}
+                         </form>
+                                          </td>
+                        <td>
+                                                  {{i.doctor.doctor_fees}}.Rs
+
+                        </td>
+                      <td>
+                      <form action="{% url 'pay' pk=i.pk%} " method="post">
+                        {% csrf_token %}
+                      {% if i.fees_status == 'pending' %}
+                        <button style='color: blue;'>
+                        <input type="hidden" name="amount" value="{{i.doctor.doctor_fees}}">
+                         pay fees
+                        </button> 
+                      {% else %}
+                          <input type="submit" name="amount"  value="{{i.fees_status}}" disabled>
+                      {% endif %}
+                      </form>
+                      </td>
+                    </tr>
+
+                <br>
+
+                {% endfor %}
+                <br>
+
+              </table><br>
+              <br>
+              <center>
+     <button type="button" class="cancelbtn"><a href="{% url 'index' %}"> Cancel</a></button>
+<br></center>
+
+  </body>
+  </html>
+  {% endblock %}

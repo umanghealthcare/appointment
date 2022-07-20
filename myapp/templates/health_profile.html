@@ -1,0 +1,169 @@
+{% extends 'header.html' %}
+
+{% load static %}
+
+{% block contant %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+  <head>
+<body>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 50%;
+  padding: 20px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 20%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 50%;
+  }
+}
+</style>
+<body>
+<br>
+<br>
+<br>
+<form action="{% url 'health_profile' %}" style="border:1px solid #ccc" enctype="multipart/form-data" method="POST">
+
+  <div class="container">
+    {% csrf_token %}
+    <br>
+    <br><br>
+    <br>
+    
+    <br>
+    <br>
+    <h1>Health Profile</h1>
+    <hr>
+    {% if msg %}
+    <b style="color: red;">{{msg}}</b>
+    {% endif %}
+    <br>
+    <label for="text"><b>Blood Group</b></label><br>
+    <input type="text" placeholder="blood Group" name="blood_group" value="{{patient_health_profile.blood_group}}" required><br>
+    
+    <label for="text"><b>weight</b></label><br>
+    <input type="text" placeholder="weight" name="weights" value="{{patient_health_profile.weights}} kg" required><br>
+    <label for="text"><b>Blood Group</b></label><br>
+
+    <select name='blood_pressue' >
+          
+
+    {% if patient_health_profile.blood_pressue == True %}
+      <option value="{{patient_report.blood_pressue}}">--Blood Pressure--</option>
+
+      <option value='yes' selected>Yes</option>
+      <option value="no">No</option>
+
+    {% elif patient_health_profile.blood_pressue == False %}  
+      <option >--Blood Pressure--</option>
+
+      <option value="yes">Yes</option>
+      <option value="no" selected>No</option>
+
+    {% else %}
+
+      <option>--Blood Pressure--</option>
+
+      <option value="yes">Yes</option>
+      <option value="no" >No</option>
+
+   {% endif %}
+             </select>
+
+    <br>
+    <br>
+    <br>
+    <label for="text"><b>Diabetes</b></label><br>
+       <select name="diabetes" >
+
+     {% if patient_health_profile.diabetes == True %}
+      <option value="{{patient_report.diabetes}}">--Diabetes--</option>
+      <option value='yes' selected>Yes</option>
+      <option value="no">No</option>
+    </select>
+
+    {% elif patient_health_profile.diabetes == False %}  
+      <option>--Diabetes--</option>
+      <option value="yes">Yes</option>
+      <option value="no" selected >No</option>
+
+    {% else %}
+      <option>--Diabetes--</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+
+   {% endif %}
+              </select>
+
+    <div class="clearfix">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <button type="submit" class="signupbtn">update</button>
+    </div>
+  </div>
+</form>
+  </body>
+</html>
+
+{% endblock %}

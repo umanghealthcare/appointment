@@ -1,0 +1,92 @@
+{% extends 'doctor_header.html' %}
+{% load static %}
+{% block contant %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+</head>
+
+
+<body id="top">
+
+
+<section class="page-title bg-1">
+      <div class="col-md-12">
+        <div class="block text-center">
+            <br><br><br><br><br>
+          <h1 class="text-capitalize mb-5 text-lg">Appoinment</h1>
+        </div>
+    </div>
+</section>
+<br>
+{% if msg %}
+    <b style="color:red">{{msg}}</b>
+{% endif %}
+<br><center>
+ <table border="5" width="80%" cellpadding="10px" cellspacing="10px">
+                <tr>
+                  <th>Sr. No</th>
+                  <th>Patient Name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Health Issue</th>
+                  <th>Status</th>
+                  <th>action</th>
+                 <th>Health Profile</th>
+                 <th>prescription</th>
+
+                </tr>
+                {% for i in appointments %}
+                  {% if i.fees_status == 'paid'%}
+                <tr>
+                  <td>{{i.id}}</td>
+                  <td>{{i.patient.fname}}</td>
+                  <td>{{i.date}}</td>
+                  <td>{{i.time}}</td>
+                  <td>{{i.discrpiton}}</td>
+
+                  <td>{{i.status}}</td>
+                  <td>
+                    <form action="{% url 'doctor_accepted_appointment' pk=i.pk %} " method="POST">
+                       {% csrf_token %}
+                      {% if i.status == 'pending' %}
+                        <input type="submit" name="button" value="accepted">
+                      {% endif %}
+                         </form>
+                    
+                    <form action="{% url 'doctor_cancel_appointment' pk=i.pk %} " method="get">
+                      {% csrf_token %}
+                      {% if i.status == 'pending' %}
+                        <input type="submit" name="button" style="color: red;" value="cancel">
+                      {% elif i.status == 'accepted'%}
+                      <a href="{% url 'prescription_by_doctor' pk=i.pk %}">  <input type="button" name="button" style="color: red;" value="prescription"></a>
+                      
+                      {% else %}
+
+                        <input type="submit" name="button" value="{{i.status}}" disabled>
+                        
+                      {% endif %}
+                         </form>
+                                          </td>
+
+                <br>
+                {% endif %}
+                <td style="color: red;">
+                  <a href="{% url 'patient_health_report' pk=i.pk %}" style="color:red;">health profile</a>
+                </td>
+                <td> <a href="{% url 'prescription_by_doctor' pk=i.pk %}">  <input type="button" name="button" style="color: blue;" value="prescription"></a>
+                     </td>
+                {% endfor %}
+                <br>
+                    </tr>
+
+              </table>
+     <button type="button" class="cancelbtns"><a href="{% url 'doctor_index' %}"> Cancel</a></button>
+
+              </center>
+  </body>
+  </html>
+  {% endblock %}

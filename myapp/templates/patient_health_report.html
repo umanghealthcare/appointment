@@ -1,0 +1,122 @@
+{% extends 'doctor_header.html' %}
+
+{% load static %}
+
+{% block contant %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+  <head>
+<body>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 50%;
+  padding: 20px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 20%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 50%;
+  }
+}
+</style>
+<body>
+<br>
+<br>
+<br>
+
+  <div class="container">
+    {% csrf_token %}
+    <br>
+    <br><br>
+    <br>
+    
+    <br>
+    <br>
+    <h1>Health Profile</h1>
+    <hr>
+    {% if msg %}
+    <b style="color: red;">{{msg}}</b>
+    {% endif %}
+    <br>
+    <label for="text"><b>Blood Group</b></label><br>
+    <input type="text" placeholder="blood Group" name="blood_group" value="{{health_profile.blood_group}}" required><br>
+    
+    <label for="text"><b>weight</b></label><br>
+    <input type="text" placeholder="weight" name="weights" value="{{health_profile.weights}}" required><br>
+    <label for="text"><b>Blood pressue</b></label><br>
+    <input type="text" placeholder="weight" name="weights" value="{{health_profile.blood_pressue}}" required><br>
+    <label for="boolean"><b>Diabetes</b></label><br>
+    <input type="text" placeholder="weight" name="weights" value="{{health_profile.diabetes}}" required><br>
+    
+          
+
+    
+    <div class="clearfix">
+      <a href="{% url 'doctor_appointment_schedule' %}"><button type="button" class="cancelbtn">Cancel</button></a>
+    </div>
+  </div>
+  </body>
+</html>
+
+{% endblock %}
