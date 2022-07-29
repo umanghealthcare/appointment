@@ -34,4 +34,5 @@ urlpatterns = [
     path('patient_health_report/<int:pk>/',views.patient_health_report,name='patient_health_report'),
     path('prescription_by_doctor/<int:pk>/',views.prescription_by_doctor,name='prescription_by_doctor'),
     path('prescription_by_doctor_patient/<int:pk>/',views.prescription_by_doctor_patient,name='prescription_by_doctor_patient'),
+    path('website/',views.website,name='website'),
 ]

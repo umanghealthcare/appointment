@@ -616,3 +616,6 @@ def prescription_by_doctor(request,pk):
 def prescription_by_doctor_patient(request,pk):
 	appointment=Appointment.objects.get(pk=pk)
 	return render(request,"prescription_by_doctor_patient.html",{'appointment':appointment})
+
+def website(request):
+	return  render(request,'website.html')
